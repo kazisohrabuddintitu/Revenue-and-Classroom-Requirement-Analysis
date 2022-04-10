@@ -2,7 +2,6 @@ from pickle import TRUE
 import string
 from django.db import models
 
-
 # Create your models here.
 class School_T(models.Model):
     SchoolTitle = models.CharField(max_length=5, primary_key=TRUE)
@@ -76,6 +75,3 @@ class Section_T(models.Model):
 
     def __str__(self):
         return string(self.SectionNum)
-
-
-
