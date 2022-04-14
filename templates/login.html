@@ -1,4 +1,19 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% block main %}
+<div>
+    <form method="post" action="/login" class="home__info" style="display: block">
+        {% csrf_token %}
+        <input type="name" name="username" placeholder="Username" style="background-color: #edf6f9; padding: 1.5rem; margin: 15px; border: none; border-radius: 15px; box-shadow: 0 6px #999; font-size: 1.5rem;font-weight: 600; text-align: center; text-transform: uppercase; color: #240046;">
+        <input type="password" name="password" placeholder="Password" style="background-color: #edf6f9; padding: 1.5rem; margin: 15px; border: none; border-radius: 15px; box-shadow: 0 6px #999; font-size: 1.5rem;font-weight: 600; text-align: center; text-transform: uppercase; color: #240046;">
+        <button type="submit"><a>Log In</a></button>
+    </form>
+</div>
+{% endblock main %}
+
+
+
+{% comment %} <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -29,4 +44,4 @@
     </div>
 </body>
 
-</html>
+</html> {% endcomment %}

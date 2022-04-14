@@ -1,6 +1,7 @@
 /*=============== GOOGLE FONTS ===============*/
 /* https://fonts.google.com/ */
 @import url("https://fonts.googleapis.com/css2?family=STIX+Two+Text:wght@400;500;600;700&display=swap");
+
 /*=============== VARIABLES CSS ===============*/
 :root {
   --header-height: 3rem;
@@ -44,7 +45,7 @@
 ::before,
 ::after {
   -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   padding: 0;
   margin: 0;
 }
@@ -144,11 +145,11 @@ grid {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .nav__logo {
@@ -188,13 +189,13 @@ grid {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  flex-wrap: wrap;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .home__height {
@@ -215,13 +216,13 @@ grid {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  flex-wrap: wrap;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .home__info button {
@@ -233,7 +234,7 @@ grid {
   border: none;
   border-radius: 15px;
   -webkit-box-shadow: 0 6px #999;
-          box-shadow: 0 6px #999;
+  box-shadow: 0 6px #999;
   /*& :hover {
         background-color: var(--button-color-alt);
         padding: 15px;
@@ -244,7 +245,7 @@ grid {
 .home__info button ::active {
   background-color: var(--button-color-alt);
   -webkit-box-shadow: 0 6px #999;
-          box-shadow: 0 6px #999;
+  box-shadow: 0 6px #999;
 }
 
 .home__info button a {
@@ -341,10 +342,10 @@ grid {
 @media screen and (min-width: 576px) {
   .nav__list {
     -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
     -webkit-column-gap: 3rem;
-            column-gap: 3rem;
+    column-gap: 3rem;
   }
 }
 
@@ -352,27 +353,34 @@ grid {
   body {
     margin: 0;
   }
+
   .section {
     padding: 2rem 0 1rem;
   }
+
   .nav {
     height: calc(var(--header-height) + 1.5rem);
     /* 4.5rem */
   }
+
   .nav__img {
     display: none;
   }
+
   .nav__icon {
     display: none;
   }
+
   .nav__name {
     font-size: var(--normal-font-size);
     /* display: block; */
     /* Minimalist design, visible labels */
   }
+
   .nav__link:hover {
     color: var(--first-color);
   }
+
   /* First design, remove if you choose the minimalist design */
   .active-link::before {
     content: "";
@@ -383,6 +391,7 @@ grid {
     background-color: var(--first-color);
     border-radius: 50%;
   }
+
   /* Minimalist design */
   /* .active-link::before{
           bottom: -.75rem;
@@ -395,8 +404,10 @@ grid {
     margin-left: auto;
     margin-right: auto;
   }
+
   .home__img {
     margin-top: 13vh;
   }
 }
+
 /*# sourceMappingURL=styles.css.map */
