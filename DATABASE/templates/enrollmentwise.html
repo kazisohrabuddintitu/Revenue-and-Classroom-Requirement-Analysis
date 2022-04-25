@@ -26,7 +26,7 @@
                     <td class="form-field" style="padding-right:30px;">
                         <label style="padding-right:5px;" for="scl">School</label>
                         <select style="width:120px;height:30px;" class="form-select selectpicker" id="scl" name="scl"
-                            form="myform" title="Select School">
+                            form="myform" title="Select School" multiple>
                             {% for i in schools %}
                             {% if i == scl %}
                             <option value="{{i}}" selected="selected">{{i}}</option>
@@ -39,7 +39,7 @@
                     <td class="form-field" style="padding-right:30px;">
                         <label style="padding-right:5px;" for="sem">Semester</label>
                         <select style="width:120px;height:30px;" class="form-select selectpicker" id="sem" name="sem"
-                            form="myform" title="Select School" multiple>
+                            form="myform" title="Select Semester">
                             {% for i in semesters %}
                             {% if i == sem %}
                             <option value="{{i}}" selected="selected">{{i}}</option>
