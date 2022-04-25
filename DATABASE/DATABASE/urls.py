@@ -13,9 +13,39 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
+# from django.contrib import admin
+# from django.urls import path, include
+# from django.contrib import admin
+# from django.urls import path
+# from django.urls.conf import include
+# from RCRAS import views
+# #from django.contrib.auth.views import 
+# urlpatterns = [
+#     path('admin/', admin.site.urls),
+#     path('', include('RCRAS.urls')),
+#      path('', views.index, name='index'),
+#     path('login', views.loginUser, name='login'),
+#     path('logout', views.logoutUser, name='logout'),
+#     path('revenue/', views.revenue,name='revenue'),
+#     path('about/', views.about,name='about'),
+#     path('view_enrolment_course_school',views.enrollment_wise_course_school,name='view_enrolment_course_school'),
+# ]
+
+
+
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from RCRAS import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+     path('admin/', admin.site.urls),
+     path('', views.loginUser, name='login'),
+     path('login/', views.loginUser, name='login'),
+    path('logout', views.logoutUser, name='logout'),
+    path('revenue/', views.revenue,name='revenue'),
+    path('about/', views.about,name='about'),
+     path('view_enrolment_course_school',
+         views.view_enrolment_course_school, name='view_enrolment_course_school'),
+    #path('view_enrolment_course_school',views.enrollment_wise_course_school,name='view_enrolment_course_school'),
 ]
