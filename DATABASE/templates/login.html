@@ -1,0 +1,75 @@
+{% extends 'menu.html' %} {% block main %}
+<div>
+  <form method="post" action="" class="home__info" style="display: block">
+    {% csrf_token %}
+    <input
+      type="name"
+      name="username"
+      placeholder="Username"
+      style="
+        background-color: #edf6f9;
+        padding: 1.5rem;
+        margin: 15px;
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 6px #999;
+        font-size: 1.5rem;
+        font-weight: 600;
+        text-align: center;
+        color: #240046;
+      "
+    />
+    <input
+      type="password"
+      name="password"
+      placeholder="Password"
+      style="
+        background-color: #edf6f9;
+        padding: 1.5rem;
+        margin: 15px;
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 6px #999;
+        font-size: 1.5rem;
+        font-weight: 600;
+        text-align: center;
+        color: #240046;
+      "
+    />
+    <button type="submit"><a>Log In</a></button>
+  </form>
+</div>
+{% endblock main %} {% comment %} <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Revenue and Classroom Requirement Analysis System</title>
+    <!-- font family -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500display=swap"
+      rel="stylesheet"
+    />
+    <!-- stylesheet -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/login-styles.css' %}" />
+  </head>
+
+  <body>
+    {% load static %}
+    <img src="{% static 'images/iub_logo.png' %}" alt="" />
+    <h1>Revenue and Classroom Requirement Analysis System</h1>
+    <div>
+      <form method="post" action="/login">
+        {% csrf_token %}
+        <input type="name" name="username" placeholder="Username" />
+        <input type="password" name="password" placeholder="Password" />
+        <button type="submit">Log In</button>
+      </form>
+    </div>
+  </body>
+</html>
+{% endcomment %}

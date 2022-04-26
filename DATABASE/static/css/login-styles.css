@@ -1,0 +1,124 @@
+/*===== GOOGLE FONTS =====*/
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
+
+body {
+  font-family: "Nunito", sans-serif;
+  padding: 0;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+img {
+  width: 160px;
+}
+
+h1 {
+  font-size: 34px;
+  color: #12276b;
+}
+
+div {
+  /* background-color: #88b6f7; */
+  background: linear-gradient(
+      to right,
+      rgba(100, 200, 200, 1),
+      rgba(100, 200, 200, 1)
+    ),
+    linear-gradient(
+      to right,
+      rgba(255, 0, 0, 1),
+      rgba(255, 0, 180, 1),
+      rgba(0, 100, 200, 1)
+    );
+  padding: 0 100px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+
+input {
+  background-color: #ffffff;
+  font-size: 24px;
+  margin-bottom: 16px;
+  padding: 8px 16px;
+  display: block;
+  width: 400px;
+  border: 0;
+  border-radius: 8px;
+}
+
+button {
+  background-color: #12276b;
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: 700;
+  margin: 10px 0;
+  padding: 8px 16px;
+  width: 200px;
+  cursor: pointer;
+  border: 0;
+  border-radius: 8px;
+}
+
+button:hover {
+  transform: scale(1.1);
+  transition: 0.5s ease-in-out;
+}
+
+/*========== SCROLL UP ==========*/
+.scrollup {
+  position: fixed;
+  background-color: var(--first-color);
+  right: 1rem;
+  bottom: -20%;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 0.3rem;
+  border-radius: 0.25rem;
+  z-index: var(--z-tooltip);
+  opacity: 0.8;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.scrollup:hover {
+  background-color: var(--first-color-alt);
+  opacity: 1;
+}
+
+.scrollup__icon {
+  font-size: 1.25rem;
+  color: white;
+}
+
+/*========== SHOW SCROLL UP ==========*/
+.show-scroll {
+  bottom: 4rem;
+}
+
+/*========== SCROLL BAR ==========*/
+::-webkit-scrollbar {
+  width: 0.8rem;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--scroll-bar-color);
+  border-radius: 0.6rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--scroll-thumb-color);
+  border-radius: 0.6rem;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--button-color-alt);
+}

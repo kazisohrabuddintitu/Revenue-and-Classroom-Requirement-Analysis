@@ -1,0 +1,151 @@
+{% extends 'chartLayout.html' %} {% block title %} RCRAS | ClassSizeDistribution
+{% endblock %} {% block heading %} Enrollment Wise Course Distribution {%
+endblock %} {% block content %} {% load static %}
+<meta id="viewport" name="viewport" content="width=device-width" />
+
+<!--=============== CSS ===============-->
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap"
+/>
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/util.css' %}" />
+
+<!--=============== FORM ===============-->
+<form style="text-align: center; width: 1500px" action="" method="post">
+  {% csrf_token %}
+
+  <ul class="box-info">
+    <li>
+      <select
+        name="semester"
+        class="form-select form-select-lg mb-3"
+        aria-label=".form-select-lg example"
+        style="margin-left: 40%"
+      >
+        <option selected>Semester</option>
+        {% for semester in semesterList %}
+        <option value="{{semester}}">{{semester}}</option>
+        {% endfor %}
+      </select>
+    </li>
+    <li>
+      <select
+        name="year"
+        class="form-select form-select-lg mb-3"
+        aria-label=".form-select-lg example"
+        style="margin-left: 40%"
+      >
+        <option selected>Year</option>
+        {% for year in yearList %}
+        <option value="{{year}}">{{year}}</option>
+        {% endfor %}
+      </select>
+    </li>
+    <li>
+      <button class="btn btn-primary btn-lg" style="margin-left: 40%">
+        Generate
+      </button>
+    </li>
+  </ul>
+</form>
+<div class="table-data">
+  <div class="order">
+    <h3 style="text-align: center">{{str}}</h3>
+    <div>
+      <table
+        border="3"
+        cellpadding="5"
+        cellspacing="5"
+        style="background-color: #daedf4"
+      >
+        {% for row in table %}
+        <tr>
+          {% for col in row %}
+          <td style="text-align: center">{{ col }}</td>
+          {% endfor %}
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- WRITE CODE HERE TO SHOW CHART -->
+<div class="table-data">
+  <div class="order">
+    <h3 style="text-align: center">Class Size Distribution ( {{str}} )</h3>
+  </div>
+</div>
+<div class="table-data">
+  <div style="background-color: #0c0c1e">
+    <canvas id="classSizeDistributionChart" width="1500" height="600"> </canvas>
+  </div>
+  <!-- THIS IS THE JAVASCRIPT THAT WILL CONTROL THE BEHAVIOUR OF THIS CHART ELEMENT -->
+  <script>
+    const ctx = document.getElementById('classSizeDistributionChart')
+
+    const datalist = {
+    	labels: [{% for label in labels %} '{{ label }}', {% endfor %}],
+    	{% comment %} labels: labels, {% endcomment %}
+    	datasets: [{
+    		type: 'line',
+    		label: 'Total',
+    		backgroundColor: ['rgb(255, 99, 132)',],
+    	  	borderColor: 'rgb(75, 192, 192)',
+    		data: [{% for value in total %} {{ value }}, {% endfor %}],
+    	},{
+    		type: 'bar',
+    		label: 'SBE',
+    		backgroundColor: [
+    		'rgb(54, 162, 235, 1)', //standard blue
+    	  ],
+    		{% comment %} borderColor: 'rgb(255, 99, 132)', {% endcomment %}
+    		data: [{% for value in sbe %} {{ value }}, {% endfor %}],
+    	},{
+    		type: 'bar',
+    		label: 'SELS',
+    		backgroundColor: [
+    		'rgb(255, 205, 86, 1)', //yellow
+    	  ],
+    		{% comment %} borderColor: 'rgb(255, 99, 132)', {% endcomment %}
+    		data: [{% for value in sels %} {{ value }}, {% endfor %}],
+    	},{
+    		type: 'bar',
+    		label: 'SETS',
+    		backgroundColor: [
+    		'rgb(0,206,209, 1)', //aqua
+    	  ],
+    		{% comment %} borderColor: 'rgb(255, 99, 132)', {% endcomment %}
+    		data: [{% for value in sets %} {{ value }}, {% endfor %}],
+    	},{
+    		type: 'bar',
+    		label: 'SLASS',
+    		backgroundColor: [
+    		'rgb(255, 99, 132, 1)', //blush pink
+    	  ],
+    		{% comment %} borderColor: 'rgb(255, 99, 132)', {% endcomment %}
+    		data: [{% for value in slass %} {{ value }}, {% endfor %}],
+    	},{
+    		type: 'bar',
+    		label: 'SPPH',
+    		backgroundColor: [
+    		'rgb(255, 152, 48, 1)', //mustard orange
+    	  ],
+    		{% comment %} borderColor: 'rgb(255, 99, 132)', {% endcomment %}
+    		data: [{% for value in spph %} {{ value }}, {% endfor %}],
+    	}]
+    }
+    //Here chart is a constructor and we're passing parameters
+    const myChart = new Chart(
+    	ctx,
+    	{
+    		type: 'scatter',
+    		data: datalist,
+    		options: {}
+    		}
+    	  )
+  </script>
+</div>
+
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'chartLayout.html' %} {% block title %} RCRAS |
+EnrollmentBreakdownOfSchoolView {% endblock %} {% block heading %} Enrollment
+Breakdown of Schools {% endblock %} {% block content %}
+
+<meta id="viewport" name="viewport" content="width=device-width" />
+
+<!--=============== CSS ===============-->
+<link rel="stylesheet" href="static/css/styles.css"></link>
+
+<div>
+  <select name="semester">
+    <option selected>Semester</option>
+    {% for semester in semesterList %}
+    <option value="{{semester}}">{{semester}}</option>
+    {% endfor %}
+  </select>
+
+  <select name="year">
+    <option selected>Year</option>
+    {% for year in yearList %}
+    <option value="{{year}}">{{year}}</option>
+    {% endfor %}
+  </select>
+
+<button>Generate</button>
+</div>
+
+
+<div class="table-data">
+  <div class="order">
+    <h3 style="text-align: center">{{str}}</h3>
+    <div align="center">
+      <table
+        border="3"
+        cellpadding="5"
+        cellspacing="5"
+        style="background-color: #daedf4"
+      >
+        {% for row in table %}
+        <tr>
+          {% for col in row %}
+          <td style="text-align: center">{{ col }}</td>
+          {% endfor %}
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

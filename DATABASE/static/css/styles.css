@@ -1,0 +1,446 @@
+/*=============== GOOGLE FONTS ===============*/
+/* https://fonts.google.com/ */
+@import url("https://fonts.googleapis.com/css2?family=STIX+Two+Text:wght@400;500;600;700&display=swap");
+
+/*=============== VARIABLES CSS ===============*/
+:root {
+  --header-height: 3rem;
+  /*========== Colors ==========*/
+  /* https://colors.dopely.top/color-pedia */
+  --hue: 174;
+  --sat: 63%;
+  --first-color: #240046;
+  --first-color-alt: #00b4d8;
+  --title-color: #14213d;
+  --text-color: #000000;
+  --body-color: #f8f9fa;
+  --container-color: #edf6f9;
+  --button-color: #edf6f9;
+  --button-color-alt: #8eecf5;
+  --scroll-bar-color: #adb5bd;
+  --scroll-thumb-color: #a3c4f3;
+  /*========== Font and typography ==========*/
+  --body-font: "STIX Two Text", serif;
+  --header-font-size: 2rem;
+  --title-font-size: 1.5rem;
+  --subtitle-font-size: 1.15rem;
+  --normal-font-size: 0.938rem;
+  --tiny-font-size: 0.625rem;
+  /*========== Font weight ==========*/
+  --font-semi-bold: 600;
+  --font-bold: 700;
+  /*========== Margins ==========*/
+  --mb-0-5: 0.5rem;
+  --mb-0-75: 0.75rem;
+  --mb-1: 1rem;
+  --mb-1-5: 1.5rem;
+  --mb-2: 2rem;
+  /*========== z-index ==========*/
+  --z-tooltip: 10;
+  --z-fixed: 100;
+}
+
+/*=============== BASE ===============*/
+*,
+::before,
+::after {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: var(--header-height) 0 0 0;
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+  /*background-image: -webkit-linear-gradient(
+    60deg,
+    rgba(218, 169, 215, 0.637),
+    rgba(128, 174, 235, 0.904)
+  );*/
+  background-image: radial-gradient(
+    circle at -7.92% 90.56%,
+    #eaedd5 0,
+    #e6eed6 4.55%,
+    #e3efd8 9.09%,
+    #dff0da 13.64%,
+    #dcf0dd 18.18%,
+    #d9f1df 22.73%,
+    #d6f1e2 27.27%,
+    #d3f2e5 31.82%,
+    #d1f2e8 36.36%,
+    #cff2ec 40.91%,
+    #cef2ef 45.45%,
+    #cdf2f2 50%,
+    #cdf2f5 54.55%,
+    #cdf1f8 59.09%,
+    #cef1fa 63.64%,
+    #cff0fd 68.18%,
+    #d1f0ff 72.73%,
+    #d4efff 77.27%,
+    #d6eeff 81.82%,
+    #daedff 86.36%,
+    #ddecff 90.91%,
+    #e1ebff 95.45%,
+    #e5eaff 100%
+  );
+  background-position: center 0;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  color: var(--text-color);
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: var(--font-bold);
+  color: var(--title-color);
+  line-height: 1.6;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/*=============== REUSABLE CSS CLASSES ===============*/
+.section {
+  padding: 0;
+}
+
+.section__title {
+  font-size: var(--title-font-size);
+  color: var(--title-color);
+  text-align: center;
+  margin-bottom: var(--mb-1-5);
+}
+
+.section__subtitle {
+  font-size: var(--subtitle-font-size);
+  color: var(--subtitle-color);
+  text-align: center;
+  margin-bottom: var(--mb-1-5);
+}
+
+/*=============== LAYOUT ===============*/
+.container {
+  max-width: 968px;
+  margin-left: var(--mb-1);
+  margin-right: var(--mb-1);
+  line-height: 1.6;
+}
+
+grid {
+  display: -ms-grid;
+  display: grid;
+  gap: 1.5rem;
+}
+
+/*=============== HEADER ===============*/
+.header {
+  width: 100%;
+  background-color: var(--container-color);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: var(--z-fixed);
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.nav {
+  height: var(--header-height);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.nav__logo {
+  color: var(--title-color);
+  font-weight: var(--font-bold);
+  font-size: var(--normal-font-size);
+  text-transform: uppercase;
+}
+
+.nav__logo a {
+  color: inherit;
+  background: -webkit-gradient(
+      linear,
+      left top,
+      right top,
+      from(#64c8c8),
+      to(#64c8c8)
+    ),
+    -webkit-gradient(linear, left top, right top, from(red), color-stop(#ff00b4), to(#0064c8));
+  background: linear-gradient(to right, #64c8c8, #64c8c8),
+    linear-gradient(to right, red, #ff00b4, #0064c8);
+  background-size: 100% 2px, 0 2px;
+  background-position: 100% 100%, 0 100%;
+  background-repeat: no-repeat;
+  -webkit-transition: background-size 0.3s;
+  transition: background-size 0.3s;
+}
+
+.nav__logo a:hover {
+  background-size: 0 2px, 100% 2px;
+}
+
+/*=============== HOME ===============*/
+.home__img {
+  display: block;
+  width: 25%;
+  height: auto;
+  padding-top: var(--mb-0-75);
+  margin: 0 auto 0;
+}
+
+.home__container {
+  row-gap: 1.5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.home__height {
+  height: auto;
+}
+
+.home__title {
+  font-size: var(--header-font-size);
+  font-weight: var(--font-bold);
+  color: var(--title-color);
+  text-align: center;
+  margin-top: var(--mb-0-75);
+  margin-bottom: var(--mb-0-75);
+}
+
+.home__info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.home__info button {
+  padding: var(--mb-1-5);
+  margin: 15px;
+  cursor: pointer;
+  outline: none;
+  background-color: var(--button-color);
+  border: none;
+  border-radius: 15px;
+  -webkit-box-shadow: 0 6px #999;
+  box-shadow: 0 6px #999;
+  /*& :hover {
+        background-color: var(--button-color-alt);
+        padding: 15px;
+        border-radius: 15px;
+      }*/
+}
+
+.home__info button ::active {
+  background-color: var(--button-color-alt);
+  -webkit-box-shadow: 0 6px #999;
+  box-shadow: 0 6px #999;
+}
+
+.home__info button a {
+  font-size: var(--title-font-size);
+  font-weight: var(--font-semi-bold);
+  font-family: var(--body-font);
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--first-color);
+}
+
+.home__info button a :hover {
+  text-transform: capitalize;
+  color: red;
+}
+
+.footer__height {
+  height: auto;
+}
+
+.footer__copy {
+  margin: 150px 0 25px;
+}
+
+/*===============  BUTTONS ===============*/
+.buttons__header {
+  display: none;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/*========== SCROLL UP ==========*/
+.scrollup {
+  position: fixed;
+  background-color: var(--first-color);
+  right: 1rem;
+  bottom: -20%;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 0.3rem;
+  border-radius: 0.25rem;
+  z-index: var(--z-tooltip);
+  opacity: 0.8;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.scrollup:hover {
+  background-color: var(--first-color-alt);
+  opacity: 1;
+}
+
+.scrollup__icon {
+  font-size: 1.25rem;
+  color: white;
+}
+
+/*========== SHOW SCROLL UP ==========*/
+.show-scroll {
+  bottom: 4rem;
+}
+
+/*========== SCROLL BAR ==========*/
+::-webkit-scrollbar {
+  width: 0.8rem;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--scroll-bar-color);
+  border-radius: 0.6rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--scroll-thumb-color);
+  border-radius: 0.6rem;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--button-color-alt);
+}
+
+/*=============== MEDIA QUERIES ===============*/
+/* For small devices */
+/* Remove if you choose, the minimalist design */
+@media screen and (max-width: 320px) {
+  .nav__name {
+    display: none;
+  }
+}
+
+/* For medium devices */
+@media screen and (min-width: 576px) {
+  .nav__list {
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-column-gap: 3rem;
+    column-gap: 3rem;
+  }
+}
+
+@media screen and (min-width: 767px) {
+  body {
+    margin: 0;
+  }
+
+  .section {
+    padding: 2rem 0 1rem;
+  }
+
+  .nav {
+    height: calc(var(--header-height) + 1.5rem);
+    /* 4.5rem */
+  }
+
+  .nav__img {
+    display: none;
+  }
+
+  .nav__icon {
+    display: none;
+  }
+
+  .nav__name {
+    font-size: var(--normal-font-size);
+    /* display: block; */
+    /* Minimalist design, visible labels */
+  }
+
+  .nav__link:hover {
+    color: var(--first-color);
+  }
+
+  /* First design, remove if you choose the minimalist design */
+  .active-link::before {
+    content: "";
+    position: absolute;
+    bottom: -0.75rem;
+    width: 4px;
+    height: 4px;
+    background-color: var(--first-color);
+    border-radius: 50%;
+  }
+
+  /* Minimalist design */
+  /* .active-link::before{
+          bottom: -.75rem;
+      } */
+}
+
+/* For large devices */
+@media screen and (min-width: 1024px) {
+  .container {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .home__img {
+    margin-top: 13vh;
+  }
+}
+
+/*# sourceMappingURL=styles.css.map */
