@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--=============== BOXICONS ===============-->
+    <!-- https://boxicons.com/ -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"
+    />
+
+    <!--=============== CSS ===============-->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+
+    <title>Revenue and Classroom Requirement Analysis System</title>
+  </head>
+  <body>
+    <!--=============== HEADER ===============-->
+    <header class="header" id="header">
+      <nav class="nav container nav__logo">
+        <a href="http://www.iub.edu.bd/">Independent University, Bangladesh</a>
+
+        {% block nav %}{% endblock nav %}
+      </nav>
+    </header>
+
+    <main>
+      <!--=============== HOME ===============-->
+      <section class="home container home__height" id="home">
+        <div class="home__container">
+          <div class="home__data">
+            {% load static %}
+            <img
+              src="{% static 'images/iub_logo.png' %}"
+              class="home__img"
+              alt="logo"
+            />
+
+            <h1 class="home__title">
+              Revenue and Classroom Requirement Analysis System
+            </h1>
+          </div>
+
+          {% block main %}{% endblock main %}
+        </div>
+      </section>
+
+      <!--=============== FOOTER ===============-->
+      <footer>
+        <section
+          class="footer__content container footer__height"
+          id="footer__cont"
+        >
+          <p class="footer__copy">
+            Copyright &#169; 2022 Independent University, Bangladesh. All right
+            reserved
+          </p>
+        </section>
+      </footer>
+
+      <!--=============== SCROLL UP ===============-->
+      <a href="#" class="scrollup" id="scroll-up">
+        <i class="bx bx-up-arrow-circle scrollup__icon"></i>
+      </a>
+    </main>
+
+    <!--=============== MAIN JS ===============-->
+    {% comment %}
+    <script src="assets/js/main.js"></script>
+    {% endcomment %}
+  </body>
+</html>

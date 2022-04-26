@@ -1,0 +1,19 @@
+{% extends 'base.html' %} {% block nav %}
+<a href="/logout">Logout</a>
+{% endblock nav %} {% block main %}
+<div class="home__info">
+  <button><a href="/revenue" target="_blank">Revenue Analysis</a></button>
+  <button>
+    <a href="view_enrolment_course_school"
+      >Enrolment wise course distribution</a
+    >
+  </button>
+  <button><a href="#" target="_blank">Resources Usages</a></button>
+  <button>
+    <a href="AvailabilityAndCourseOfferingComparisonView" target="_blank"
+      >Class Size VS Section Offered</a
+    >
+  </button>
+  <button><a href="#" target="_blank">Class Requirement</a></button>
+</div>
+{% endblock main %}

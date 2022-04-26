@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="static/css/styles.css" />
+
+    <title>Document</title>
+  </head>
+  <body>
+    <form style="text-align: center; width: 1500px" action="" method="post">
+      {% csrf_token %}
+
+      <ul class="box-info">
+        <li>
+          <select
+            name="semester1"
+            class="form-select form-select-lg mb-3"
+            aria-label=".form-select-lg example"
+            style="margin-left: 30%"
+          >
+            <option selected>Semester 1</option>
+            {% for semester in semesterList %}
+            <option value="{{semester}}">{{semester}}</option>
+            {% endfor %}
+          </select>
+        </li>
+        <li>
+          <select
+            name="semester2"
+            class="form-select form-select-lg mb-3"
+            aria-label=".form-select-lg example"
+            style="margin-left: 30%"
+          >
+            <option selected>Semester 2</option>
+            {% for semester in semesterList %}
+            <option value="{{semester}}">{{semester}}</option>
+            {% endfor %}
+          </select>
+        </li>
+        <li>
+          <select
+            name="year"
+            class="form-select form-select-lg mb-3"
+            aria-label=".form-select-lg example"
+            style="margin-left: 40%"
+          >
+            <option selected>Year</option>
+            {% for year in yearList %}
+            <option value="{{year}}">{{year}}</option>
+            {% endfor %}
+          </select>
+        </li>
+        <li>
+          <button class="btn btn-primary btn-lg" style="margin-left: 30%">
+            Compare
+          </button>
+        </li>
+      </ul>
+    </form>
+    <div class="table-data">
+      <div class="order">
+        <h3 style="text-align: center">
+          Resource Utilization in {{Semester1}} and {{Semester2}}
+        </h3>
+        <div>
+          <table
+            border="3"
+            cellpadding="5"
+            cellspacing="5"
+            style="background-color: #daedf4"
+          >
+            {% for row in table %}
+            <tr>
+              {% for col in row %}
+              <td style="text-align: center">{{ col }}</td>
+              {% endfor %}
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="table-data">
+      <div class="order">
+        <h3 style="text-align: center">
+          Resource Utilization in {{Semester1}} and {{Semester2}}
+        </h3>
+      </div>
+    </div>
+
+    <!-- WRITE CODE HERE TO SHOW CHART -->
+    <div class="table-data">
+      <div style="background-color: #0c0c1e">
+        <canvas
+          id="AvailabilityAndCourseOfferingViewComparisonChart"
+          width="1500"
+          height="600"
+        >
+        </canvas>
+      </div>
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.js"></script>
+      <script src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
+
+      <!-- THIS IS THE JAVASCRIPT THAT WILL CONTROL THE BEHAVIOUR OF THIS CHART ELEMENT -->
+      <script>
+        const ctx = document.getElementById('AvailabilityAndCourseOfferingViewComparisonChart')
+
+        const datalist = {
+            labels: [{% for label in labels %} '{{ label }}', {% endfor %}],
+            {% comment %} labels: labels, {% endcomment %}
+            datasets: [{
+                type: 'bar',
+                label: 'IUB Resource',
+                backgroundColor: [
+                'rgb(54, 162, 235, 1)', //standard blue
+              ],
+                {% comment %} borderColor: 'rgb(255, 99, 132)', {% endcomment %}
+                data: [{% for value in iub %} {{ value }}, {% endfor %}],
+            },{
+                type: 'bar',
+                label: '{{Semester1}}',
+                backgroundColor: [
+                'rgb(255, 205, 86, 1)', //yellow
+              ],
+                {% comment %} borderColor: 'rgb(255, 99, 132)', {% endcomment %}
+                data: [{% for value in datavalues1 %} {{ value }}, {% endfor %}],
+            },{
+                type: 'bar',
+                label: '{{Semester2}}',
+                backgroundColor: [
+                'rgb(255, 99, 132, 1)', //blush pink
+              ],
+                {% comment %} borderColor: 'rgb(255, 99, 132)', {% endcomment %}
+                data: [{% for value in datavalues2 %} {{ value }}, {% endfor %}],
+            }]
+        }
+        //Here chart is a constructor and we're passing parameters
+        const myChart = new Chart(
+            ctx,
+            {
+                type: 'bar',
+                data: datalist,
+                options: {}
+                }
+              )
+      </script>
+    </div>
+    <table border="1" cellpadding="5" cellspacing="5"></table>
+  </body>
+</html>

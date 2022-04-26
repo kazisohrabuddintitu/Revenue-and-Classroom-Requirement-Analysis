@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--=============== CSS ===============-->
+    <link rel="stylesheet" href="static/css/styles.css" />
+
+    <title>Class Size VS Section Offered</title>
+  </head>
+  <body>
+    <h1 style="text-align: center">Class Size VS Section Offered</h1>
+    <div style="padding: 5rem">
+      <select name="semester1">
+        <option selected>Semester 1</option>
+        {% for semester in semesterList %}
+        <option value="{{semester}}">{{semester}}</option>
+        {% endfor %}
+      </select>
+
+      <select name="semester2">
+        <option selected>Semester 2</option>
+        {% for semester in semesterList %}
+        <option value="{{semester}}">{{semester}}</option>
+        {% endfor %}
+      </select>
+
+      <select name="year">
+        <option selected>Year</option>
+        {% for year in yearList %}
+        <option value="{{year}}">{{year}}</option>
+        {% endfor %}
+      </select>
+
+      <button>Compare</button>
+    </div>
+
+    <div class="table-data">
+      <div class="order">
+        <h3 style="text-align: center">
+          Resource Utilization in {{Semester1}} and {{Semester2}}
+        </h3>
+        <div>
+          <table
+            border="3"
+            cellpadding="5"
+            cellspacing="5"
+            style="background-color: #daedf4"
+          >
+            {% for row in table %}
+            <tr>
+              {% for col in row %}
+              <td style="text-align: center">{{ col }}</td>
+              {% endfor %}
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- WRITE CODE HERE TO SHOW CHART -->
+    <div class="table-data">
+      <div style="background-color: #0c0c1e">
+        <canvas
+          id="AvailabilityAndCourseOfferingViewComparisonChart"
+          width="1500"
+          height="600"
+        >
+        </canvas>
+      </div>
+    </div>
+
+    <!--=============== JS ===============-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
+
+    <!-- THIS IS THE JAVASCRIPT THAT WILL CONTROL THE BEHAVIOUR OF THIS CHART ELEMENT -->
+    <div>
+      <script>
+        const ctx = document.getElementById('AvailabilityAndCourseOfferingViewComparisonChart')
+
+        const datalist = {
+            labels: [{% for label in labels %} '{{ label }}', {% endfor %}],
+            {% comment %} labels: labels, {% endcomment %}
+            datasets: [{
+                type: 'bar',
+                label: 'IUB Resource',
+                backgroundColor: [
+                'rgb(54, 162, 235, 1)',
+              ],
+                {% comment %} borderColor: 'rgb(255, 99, 132)', {% endcomment %}
+                data: [{% for value in iub %} {{ value }}, {% endfor %}],
+            },{
+                type: 'bar',
+                label: '{{Semester1}}',
+                backgroundColor: [
+                'rgb(255, 205, 86, 1)',
+              ],
+                {% comment %} borderColor: 'rgb(255, 99, 132)', {% endcomment %}
+                data: [{% for value in datavalues1 %} {{ value }}, {% endfor %}],
+            },{
+                type: 'bar',
+                label: '{{Semester2}}',
+                backgroundColor: [
+                'rgb(255, 99, 132, 1)',
+              ],
+                {% comment %} borderColor: 'rgb(255, 99, 132)', {% endcomment %}
+                data: [{% for value in datavalues2 %} {{ value }}, {% endfor %}],
+            }]
+        }
+
+        //Here chart is a constructor and we're passing parameters
+        const myChart = new Chart(
+            ctx,
+            {
+                type: 'bar',
+                data: datalist,
+                options: {}
+            }
+        )
+      </script>
+    </div>
+    <table border="1" cellpadding="5" cellspacing="5"></table>
+  </body>
+</html>
+
+<!--=============== CLASS SIZE VS SECTION OFFERED ===============-->
+<!--<main>
+  <section class="classVSsection__container">
+    <div class="classVSsection__info">
+      <h1 class="classVSsection__title">Class Size VS Section Offered</h1>
+
+      <div id="classSize">
+        <label for="classSize">Class Size Range</label>
+        <select name="classSize" multiple="multiple">
+          <option value="0-10">0-10</option>
+          <option value="11-20">11-20</option>
+          <option value="21-30">21-30</option>
+          <option value="31-35">31-35</option>
+          <option value="36-40">36-40</option>
+          <option value="41-50">41-50</option>
+          <option value="51-55">51-55</option>
+          <option value="56-60">56-60</option>
+          <option value="60+">60+</option>
+        </select>
+      </div>
+
+      <div id="year">
+        <label for="year">Year</label>
+        <select name="year" multiple="multiple">
+          {% for year in yearList %}
+          <option value="{{year}}">{{year}}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div id="semester">
+        <label for="semester">Semester</label>
+        <select name="semester" multiple="multiple">
+          {% for semester in semesterList %}
+          <option value="{{semester}}">{{semester}}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <button class="btn btn-primary btn-lg" style="margin-left: 30%">
+        Compare
+      </button>
+    </div>
+  </section>
+</main>-->
+
+<!--=============== MAIN JS ===============-->
+<!--<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+<script src="https://unpkg.com/multiple-select@1.5.2/dist/multiple-select.min.js"></script>-->
+
+<!--===============  MultiSelect With Search Option ===============-->
+<!--<script>
+  $(function () {
+    $("select").multipleSelect();
+  });
+</script>-->
