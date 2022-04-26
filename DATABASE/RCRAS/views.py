@@ -425,4 +425,90 @@ def view_revenue_of_iub(request):
             'yearto': yearlist,
             'search': 1,
             'segment': 'rev',
-        })                    
+        })      
+
+def view_usage_resource(request):
+    if request.method == 'POST':
+        sem = request.POST.getlist('sem')
+        year = request.POST.get('year')
+        table = []
+        total = []
+        table2 = []
+        t2r1 = ['Average of ROOM_CAPACITY']
+        t2r2 = ['Average of ENROLLED']
+        t2r3 = ['Average of Unused Space']
+        t2r4 = ['Unused Percent %']
+        selectedsem = '| '
+        for i in sem:
+            sbe = resources_usage('SBE', i, year)
+            sels = resources_usage('SELS', i, year)
+            sets = resources_usage('SETS', i, year)
+            slass = resources_usage('SLASS', i, year)
+            spph = resources_usage('SPPH', i, year)
+            selectedsem += i+' '+year+' | '
+
+            # touple of touple to list
+            sbe = [float("%.2f" % (element))
+                   for tupl in sbe for element in tupl]
+            # https://stackoverflow.com/questions/3204245/how-do-i-convert-a-tuple-of-tuples-to-a-one-dimensional-list-using-list-comprehe
+            # https://stackoverflow.com/questions/455612/limiting-floats-to-two-decimal-points
+            sels = [float("%.2f" % (element))
+                    for tupl in sels for element in tupl]
+            sets = [float("%.2f" % (element))
+                    for tupl in sets for element in tupl]
+            slass = [float("%.2f" % (element))
+                     for tupl in slass for element in tupl]
+            spph = [float("%.2f" % (element))
+                    for tupl in spph for element in tupl]
+
+            totala = sbe[0]+sels[0]+sets[0]+slass[0]+spph[0]
+            totalb = sbe[1]+sels[1]+sets[1]+slass[1]+spph[1]
+            totalc = sbe[2]+sels[2]+sets[2]+slass[2]+spph[2]
+            totald = sbe[3]+sels[3]+sets[3]+slass[3]+spph[3]
+            totale = sbe[4]+sels[4]+sets[4]+slass[4]+spph[4]
+
+            t2r1.append("%.2f" % (totalb/5))
+            t2r2.append("%.2f" % (totalc/5))
+            t2r3.append("%.2f" % (totald/5))
+            t2r4.append("%.2f" % (totale/5))
+
+            total.append([i, totala, "%.2f" % (totalb/5), "%.2f" %
+                         (totalc/5), "%.2f" % (totald/5), "%.2f" % (totale/5)])
+
+            sbe.insert(0, 'SBE')
+            sels.insert(0, 'SELS')
+            sets.insert(0, 'SETS')
+            slass.insert(0, 'SLASS')
+            spph.insert(0, 'SPPH')
+
+            total.append(sbe)
+            total.append(sels)
+            total.append(sets)
+            total.append(slass)
+            total.append(spph)
+        #print(total)
+        table += total
+        table2 = [t2r1]+[t2r2]+[t2r3]+[t2r4]
+        total = []
+        #print(table2)
+        return render(request, 'resourceusage.html', {
+            'semesters': semesterlist,
+            'years': yearlist,
+            'table': table,
+            'table2': table2,
+            'selectedsem': selectedsem,
+            'selectedyear': year,
+            'semfort2': sem,
+            'rowsize': len(sem)+1,
+            'search': 0,
+            'segment': 'usage',
+
+        })
+
+    else:
+        return render(request, 'resourceusage.html', {
+            'semesters': semesterlist,
+            'years': yearlist,
+            'search': 1,
+            'segment': 'usage',
+        })  
