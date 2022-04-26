@@ -78,6 +78,29 @@ def enrollment_wise_course_school(School, Sem, Year):
         col = cursor.fetchall()
     return col
  
+ #SELECT SUM(Sec.SectionEnrolled*Crs.CreditHour) AS Total
+   #    FROM RCRAS_section_t AS Sec, RCRAS_course_t AS Crs, RCRAS_department_t AS #Dept, RCRAS_school_t AS Schl
+   #    WHERE Sec.CourseID=Crs.CourseID, Cour.DeptID=Dept.DeptID AND Dept.SchoolTitle=Schl.SchoolTitle AND
+    #   Year={} AND Semester="{}" AND Schl.SchoolTitle="{}"
+def iub_revenue(Yearfrom, Yearto, School):
+    with connection.cursor() as cursor:
+        cursor.execute('''
+        SELECT Year,Semester,SUM(groupbycredit.sum)
+        FROM
+            (
+                SELECT COUNT(*),credithour, SUM( SectionEnrolled), credithour*SUM( SectionEnrolled) AS sum, Semester,year
+                FROM (SELECT *
+                        FROM RCRAS_department_t AS D INNER JOIN RCRAS_course_t AS C ON DeptID=DeptID_id
+                               INNER JOIN RCRAS_section_t AS S ON CourseID=CourseID_id)
+                WHERE Semester IN ("Spring","AUTUMN","SUMMER") AND Year BETWEEN {} AND {} AND SchoolTitle_id = "{}"
+                GROUP BY Year,Semester,Credithour
+            ) AS groupbycredit
+        GROUP BY Year,Semester
+        ORDER BY Year, FIELD (Semester,"Spring","Summer","Autumn");
+        '''.format(Yearfrom, Yearto, School))
 
+        col = cursor.fetchall()
+
+    return col
 
     

@@ -50,13 +50,11 @@ def loginUser(request):
 def logoutUser(request):
     logout(request)
     return redirect("/login")
-    
-def revenue(request):
-    return render(request,'revenue.html')
 
 def about(request):
     return render(request,'about.html')
 
+# Enrollment
 def view_enrolment_course_school(request):
     if request.method == 'POST':
         l = ['1-10', '11-20', '21-30', '31-35', '36-40',
@@ -89,7 +87,7 @@ def view_enrolment_course_school(request):
         list7 = []
         list8 = []
         list9 = []
-        list10 = []
+        list10 =[]
         table = []
         for i in enrollment:
             e = [item for t in i for item in t]
@@ -146,5 +144,58 @@ def view_enrolment_course_school(request):
             'search': 1,
         })
 
+# Revenue
+# school startyear startsemester endyear endsemester
+#SELECT SUM(Sec.SectionEnrolled*Crs.CreditHour) AS Total
+#FROM Section_T AS Sec, Course_T AS Crs, Department_T AS Dept, School_T AS Schl
+#WHERE Sec.CourseID=Crs.CourseID, Cour.DeptID=Dept.DeptID AND Dept.SchoolTitle=Schl.SchoolTitle AND Schl.SchoolTitle=”SETS” AND
+#Year=”2020” AND Semester=”Autumn”;
 
-    
+#Revenue value = Sec.SectionEnrolled*Crs.CreditHour
+
+def view_revenue_of_iub(request):
+    if request.method == 'POST':
+        school = request.POST.getlist('scl')
+        yearf = request.POST.get('year1')
+        yeart = request.POST.get('year2')
+        #print(school, yearf, yeart)
+        revenue = []
+        for i in school:
+            revenue.append(iub_revenue(yearf, yeart, i))
+        # #print(revenue)
+        a = abs(int(yearf)-int(yeart))+1
+        # #print(type(a))
+
+        list1 = []
+        list2 = []
+        list3 = []
+        total = []
+
+        for j in revenue:
+            for i in j:
+                list1.append(str(i[0])+i[1])
+                list2.append(int(i[2]))
+        list1 = list(dict.fromkeys(list1))
+        list2 = [list2[i:i+a*3] for i in range(0, len(list2), a*3)]
+
+        # #print(list1)
+        # #print(list2)
+        return render(request, 'revenueofiub.html', {
+            'schools': schoolList,
+            'yearfrom': yearlist,
+            'yearto': yearlist,
+            'selectedschool': school,
+            'revenuesemyear': list1,
+            'revenue': list2,
+            'search': 0,
+            'segment': 'rev',
+        })
+
+    else:
+        return render(request, 'revenueofiub.html', {
+            'schools': schoolList,
+            'yearfrom': yearlist,
+            'yearto': yearlist,
+            'search': 1,
+            'segment': 'rev',
+        })
