@@ -166,9 +166,9 @@ def iub_revenue(Yearfrom, Yearto, School):
                 WHERE Semester IN ("Spring","AUTUMN","SUMMER") AND Year BETWEEN {} AND {} AND SchoolTitle_id = "{}"
                 GROUP BY Year,Semester,Credithour
             ) AS groupbycredit
-        GROUP BY Year,Semester
-        ORDER BY Year, FIELD (Semester,"Spring","Summer","Autumn");
+        GROUP BY Year,Semester;
         '''.format(Yearfrom, Yearto, School))
+        #ORDER BY Year, FIELD (Semester,"Spring","Summer","Autumn");
 
         col = cursor.fetchall()
 
