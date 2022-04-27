@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/css/styles.css" />
+    <title>Revenue and Classroom Requirement Analysis System</title>
+</head>
+<body>
+    <form style="text-align: center; width: 1500px;" action="" method="post">
+		{% csrf_token %}
+		
+		<ul class="box-info">
+			<li>
+				<select name="semester" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" style="margin-left: 40%;">
+					<option selected>Semester</option>
+					{% for semester in semesterList %}
+						<option value = {{semester}} > {{semester}} </option>
+					{% endfor %}
+				</select>
+			</li>
+			<li>
+				<select name="year" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" style="margin-left: 40%;">
+					<option selected>Year</option>
+					{% for year in yearList %}
+						<option value = {{year}} > {{year}} </option>
+					{% endfor %}
+				</select>
+			</li>
+			<li>
+				<button class="btn btn-primary btn-lg" style="margin-left: 40%;">
+					Generate
+				</button>
+			</li>
+		</ul>
+	</form>
+		<div class="table-data">
+			<div class="order"> <h3 style="text-align:center"> {{str}} </h3>
+				<div>
+					<table border="3" cellpadding = "5" cellspacing="5"  style="background-color:#DAEDF4;">
+						
+						{% for row in table %}
+						<tr>
+							{% for col in row %}
+								<td style="text-align:center">
+									{{ col }}
+								</td>
+							{% endfor %}
+						</tr>
+					{% endfor %}
+						
+					</table>
+			
+				</div>
+			</div>
+		</div>
+
+		<div class="table-data">
+			<div class="order"> <h3 style="text-align:center"> {{str}} Summary</h3>
+				<div>
+					<table border="3" cellpadding = "5" cellspacing="5"  style="background-color:#DAEDF4;">
+						
+						{% for row in table2 %}
+						<tr>
+							{% for col in row %}
+								<td style="text-align:center">
+									{{ col }}
+								</td>
+							{% endfor %}
+						</tr>
+					{% endfor %}
+						
+					</table>
+			
+				</div>
+			</div>
+		</div>
+
+		<div class="table-data">
+			<div class="order"> 
+				<h3 style="text-align:center"> IUB Available Resources  </h3>
+			</div>
+		</div>
+		<div class="table-data">
+			<div class="order"> <h3 style="text-align:center"> {{str}} </h3>
+				<div>
+					<table border="3" cellpadding = "5" cellspacing="5"  style="background-color:#DAEDF4;">
+						
+						{% for row in table3 %}
+							<tr>
+								{% for col in row %}
+									<td style="text-align:center">
+										{{ col }}
+									</td>
+								{% endfor %}
+							</tr>
+						{% endfor %}
+
+						{% for row in table4 %}
+							<tr>
+								{% for col in row %}
+									<td style="text-align:center">
+										{{ col }}
+									</td>
+								{% endfor %}
+							</tr>
+						{% endfor %}
+
+					</table>
+			
+				</div>
+			</div>
+		</div>
+</body>
+</html>
